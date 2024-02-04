@@ -27,7 +27,7 @@ namespace HrAppSimple.Repository
 
         public Locatie GetLocatieByDepartament(int codDepartament)
         { 
-               return _context.Departamente
+               return _context.Departament
                    .Where(d => d.CodDepartament == codDepartament)
                    .SelectMany(d => d.Locatie) 
                    .FirstOrDefault();

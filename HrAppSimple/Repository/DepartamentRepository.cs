@@ -2,6 +2,7 @@
 using HrAppSimple.Interface;
 using HrAppSimple.Models;
 
+
 namespace HrAppSimple.Repository
 {
     public class DepartamentRepository : IDepartamentRepository
@@ -16,15 +17,29 @@ namespace HrAppSimple.Repository
 
         public Departament GetDepartament(int codDepartament)
         {
-            return _context.Departamente.Where(d => d.CodDepartament == codDepartament).FirstOrDefault();
+            return _context.Departament.Where(d => d.CodDepartament == codDepartament).FirstOrDefault();
         }
         public ICollection<Departament> GetDepartamente()
         {
-            return _context.Departamente.ToList();
+            return _context.Departament.ToList();
         }
         public bool DepartamentExista(int codDepartament)
         {
-            return _context.Departamente.Any(d => d.CodDepartament == codDepartament);
+            return _context.Departament.Any(d => d.CodDepartament == codDepartament);
+        }
+
+        public bool CreateDepartament(Departament departament)
+        { 
+            _context.Add(departament);
+      
+            return Save();
+
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved >0 ? true : false;
         }
     }
 }

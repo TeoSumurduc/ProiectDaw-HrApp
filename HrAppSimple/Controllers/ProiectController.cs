@@ -67,5 +67,39 @@ namespace HrAppSimple.Controllers
 
             return Ok(proiect);
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateProiect([FromBody] ProiectDto proiectCreate)
+        {
+            if (proiectCreate == null)
+                return BadRequest(ModelState);
+
+            var proiect = _proiectRepository.GetProiecte()
+                .Where(c => c.CodProiect == proiectCreate.CodProiect)
+                .FirstOrDefault();
+
+            if (proiect != null)
+            {
+                ModelState.AddModelError("", "Proiectul deja exista!");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var proiectMap = _mapper.Map<Proiect>(proiectCreate);
+
+            if (!_proiectRepository.CreateProiect(proiectMap))
+            {
+                ModelState.AddModelError("", "A aparut o eroare!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Avem un departament nou!");
+        }
     }
 }

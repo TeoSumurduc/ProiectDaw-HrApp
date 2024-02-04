@@ -12,7 +12,7 @@ namespace HrAppSimple.Data
 
         public DbSet<Angajat> Angajati{ get; set; }
         public DbSet<AngajatProiect> AngajatiProiecte { get; set; }
-        public DbSet<Departament> Departamente { get; set; }
+        public DbSet<Departament> Departament { get; set; }
         public DbSet<DetaliiAngajat> DetaliiAngajati { get; set; }
         public DbSet<Locatie> Locatii { get; set; }
         public DbSet<Proiect> Proiecte { get; set; }

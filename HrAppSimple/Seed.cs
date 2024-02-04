@@ -17,7 +17,7 @@ namespace HrAppSimple
 
         public void SeedDataContext()
         {
-            if (!dataContext.Angajati.Any() && !dataContext.AngajatiProiecte.Any() && !dataContext.Departamente.Any()
+            if (!dataContext.Angajati.Any() && !dataContext.AngajatiProiecte.Any() && !dataContext.Departament.Any()
                 && !dataContext.DetaliiAngajati.Any() && !dataContext.Locatii.Any() && !dataContext.Proiecte.Any())
             {
                 var departamente = new List<Departament>
@@ -26,7 +26,7 @@ namespace HrAppSimple
                     new Departament { CodDepartament = 2, Denumire = "Vânzări" }
                 };
 
-                dataContext.Departamente.AddRange(departamente);
+                dataContext.Departament.AddRange(departamente);
                 dataContext.SaveChanges();
 
                 var locatii = new List<Locatie>

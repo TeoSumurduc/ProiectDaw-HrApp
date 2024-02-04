@@ -12,6 +12,13 @@ namespace HrAppSimple.Repository
         {
             _context = context;
         }
+
+        public bool CreateProiect(Proiect proiect)
+        {
+            _context.Add(proiect);
+            return Save();
+        }
+
         public ICollection<Angajat> GetAngajatByProiect(int codProiect)
         {
             return _context.AngajatiProiecte.Where(a => a.Proiect.CodProiect == codProiect).Select(p => p.Angajat).ToList();
@@ -57,6 +64,12 @@ namespace HrAppSimple.Repository
         public bool ProiectExista(int codProiect)
         {
             return _context.Proiecte.Any(p => p.CodProiect == codProiect);
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }
