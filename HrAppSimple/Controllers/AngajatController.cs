@@ -15,6 +15,8 @@ namespace HrAppSimple.Controllers
     {
         private readonly IAngajatRepository _angajatRepository;
         private readonly IMapper _mapper;
+        private readonly IProiectRepository _proiecteRepository;
+
         public AngajatController(IAngajatRepository angajatRepository, IMapper mapper)
         {
             _angajatRepository = angajatRepository;
@@ -166,6 +168,66 @@ namespace HrAppSimple.Controllers
                 return BadRequest(ModelState);
 
             return Ok(angajat);
+        }
+
+        [HttpPut("{Matricula}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateAngajat(int matricula,
+            [FromQuery] int codProiect, 
+            [FromBody] AngajatDto updatedAngajat)
+        {
+            if (updatedAngajat == null)
+                return BadRequest(ModelState);
+
+            if (matricula != updatedAngajat.Matricula)
+                return BadRequest(ModelState);
+
+            if (!_angajatRepository.AngajatExista(matricula))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var angajatMap = _mapper.Map<Angajat>(updatedAngajat);
+
+            if (!_angajatRepository.UpdateAngajat(codProiect, angajatMap))
+            {
+                ModelState.AddModelError("", "A aparut o eroare la update!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("{Matricula}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteAngajat(int matricula)
+        {
+            if (!_angajatRepository.AngajatExista(matricula))
+            {
+                return NotFound();
+            }
+
+            var proiecteToDelete = _proiecteRepository.GetProiectOfAAngajat(matricula);
+            var angajatToDelete = _angajatRepository.GetAngajat(matricula);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_proiecteRepository.DeleteProiect((Proiect)proiecteToDelete))
+            {
+                ModelState.AddModelError("", "A aparut o eroare la delete proiecte!");
+            }
+
+            if (!_angajatRepository.DeleteAngajat(angajatToDelete))
+            {
+                ModelState.AddModelError("", "A aparut o eroare la delete angajat!");
+            }
+
+            return NoContent();
         }
     }
 }

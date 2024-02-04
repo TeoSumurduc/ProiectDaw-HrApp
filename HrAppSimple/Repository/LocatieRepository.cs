@@ -20,6 +20,12 @@ namespace HrAppSimple.Repository
             return Save();
         }
 
+        public bool DeleteLocatie(Locatie locatie)
+        {
+            _context.Remove(locatie);
+            return Save();
+        }
+
         public Locatie GetLocatie(int codLocatie)
         {
             return _context.Locatii.Where(l => l.CodLocatie == codLocatie).FirstOrDefault();

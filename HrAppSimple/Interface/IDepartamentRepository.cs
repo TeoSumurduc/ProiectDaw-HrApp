@@ -9,6 +9,8 @@ namespace HrAppSimple.Interface
         bool DepartamentExista(int codDepartament);
 
         bool CreateDepartament(Departament departament);
+        bool UpdateDepartament(Departament departament);
+        bool DeleteDepartament(Departament departament);
         bool Save();
     }
 }

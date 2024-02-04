@@ -16,6 +16,7 @@ namespace HrAppSimple.Interface
         bool CreateLocatie(Locatie locatie);
 
         bool UpdateLocatie(Locatie locatie);
+        bool DeleteLocatie(Locatie locatie);
         bool Save();
     }
 }

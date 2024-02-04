@@ -14,6 +14,8 @@ namespace HrAppSimple.Interface
         bool CreateAngajat(int codProiect, Angajat angajat);
         ICollection<Proiect> GetProiectOfAAngajat(int codAngajat);
         ICollection<Angajat> GetAngajatByProiect(int codProiect);
+        bool UpdateAngajat(int codProiect,Angajat angajat);
+        bool DeleteAngajat(Angajat angajat);
         bool Save();
     }
 }

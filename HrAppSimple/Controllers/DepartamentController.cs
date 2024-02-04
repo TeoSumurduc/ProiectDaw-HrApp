@@ -84,6 +84,58 @@ namespace HrAppSimple.Controllers
 
             return Ok("Avem un departament nou!");
         }
+        [HttpPut("{codDepartament}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateDepartament(int codDepartament, [FromBody] DepartamentDto updatedDepartament)
+        {
+            if (updatedDepartament == null)
+                return BadRequest(ModelState);
+
+            if (codDepartament != updatedDepartament.CodDepartament)
+                return BadRequest(ModelState);
+
+            if (!_departamentRepository.DepartamentExista(codDepartament))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var departamentMap = _mapper.Map<Departament>(updatedDepartament);
+
+            if (!_departamentRepository.UpdateDepartament(departamentMap))
+            {
+                ModelState.AddModelError("", "A aparut ceva la update!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{codDepartament}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteDepartament(int matricula)
+        {
+            if (!_departamentRepository.DepartamentExista(matricula))
+            {
+                return NotFound();
+            }
+
+            var departamentToDelete = _departamentRepository.GetDepartament(matricula);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_departamentRepository.DeleteDepartament(departamentToDelete))
+            {
+                ModelState.AddModelError("", "A aparut ceva la delete!");
+            }
+
+            return NoContent();
+        }
 
     }
 }

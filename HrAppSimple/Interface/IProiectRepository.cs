@@ -13,6 +13,8 @@ namespace HrAppSimple.Interface
         ICollection<Proiect> GetProiectOfAAngajat(int codAngajat);
         ICollection<Angajat> GetAngajatByProiect(int codProiect);
         bool CreateProiect(Proiect proiect);
+        bool UpdateProiect(Proiect proiect);
+        bool DeleteProiect(Proiect proiect);
         bool Save();
     }
 }

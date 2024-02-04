@@ -156,7 +156,7 @@ namespace HrAppSimple.Controllers
             return Ok("Avem o locatie noua!");
         }
 
-        [HttpPut("{Cod Locatie}")]
+        [HttpPut("{CodLocatie}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -182,6 +182,29 @@ namespace HrAppSimple.Controllers
             {
                 ModelState.AddModelError("", "A aparut o eroare la update");
                 return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("{CodLocatie}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteLocatie(int codLocatie)
+        {
+            if (!_locatieRepository.LocatieExista(codLocatie))
+            {
+                return NotFound();
+            }
+
+            var proiectToDelete = _locatieRepository.GetLocatie(codLocatie);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_locatieRepository.DeleteLocatie(proiectToDelete))
+            {
+                ModelState.AddModelError("", "A aparut o eroare in timp ce stergeam proiectul!");
             }
 
             return NoContent();

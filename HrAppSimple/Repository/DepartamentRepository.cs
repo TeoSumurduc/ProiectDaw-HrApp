@@ -41,5 +41,17 @@ namespace HrAppSimple.Repository
             var saved = _context.SaveChanges();
             return saved >0 ? true : false;
         }
+
+        public bool UpdateDepartament(Departament departament)
+        {
+            _context.Update(departament);
+            return Save();
+        }
+
+        public bool DeleteDepartament(Departament departament)
+        {
+            _context.Remove(departament);
+            return Save();
+        }
     }
 }

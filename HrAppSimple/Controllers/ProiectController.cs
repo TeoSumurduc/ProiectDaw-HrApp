@@ -101,5 +101,58 @@ namespace HrAppSimple.Controllers
 
             return Ok("Avem un departament nou!");
         }
+        [HttpDelete("{codProiect}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteProiect(int codProiect)
+        {
+            if (!_proiectRepository.ProiectExista(codProiect))
+            {
+                return NotFound();
+            }
+
+            var proiectToDelete = _proiectRepository.GetProiect(codProiect);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_proiectRepository.DeleteProiect(proiectToDelete))
+            {
+                ModelState.AddModelError("", "A aparut o eroare in timp ce stergeam proiectul!");
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{codProiect}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateProiect(int codProiect, [FromBody] ProiectDto updatedProiect)
+        {
+            if (updatedProiect == null)
+                return BadRequest(ModelState);
+
+            if (codProiect != updatedProiect.CodProiect)
+                return BadRequest(ModelState);
+
+            if (!_proiectRepository.ProiectExista(codProiect))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var categoryMap = _mapper.Map<Proiect>(updatedProiect);
+
+            if (!_proiectRepository.UpdateProiect(categoryMap))
+            {
+                ModelState.AddModelError("", "A aparut o eroare in timp ce actualizam proiectul!");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
     }
 }

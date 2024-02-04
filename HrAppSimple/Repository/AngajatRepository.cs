@@ -33,6 +33,12 @@ namespace HrAppSimple.Repository
             return Save();
         }
 
+        public bool DeleteAngajat(Angajat angajat)
+        {
+            _context.Remove(angajat);
+            return Save();
+        }
+
         public Angajat GetAngajat(int matricula)
         {
             return _context.Angajati.Where(p => p.Matricula == matricula).FirstOrDefault();
@@ -102,6 +108,12 @@ namespace HrAppSimple.Repository
         {
             var saved = _context.SaveChanges();
             return saved>0 ? true : false;
+        }
+
+        public bool UpdateAngajat(int codProiect,Angajat angajat)
+        {
+            _context.Update(angajat);
+            return Save();
         }
     }
 }

@@ -19,6 +19,12 @@ namespace HrAppSimple.Repository
             return Save();
         }
 
+        public bool DeleteProiect(Proiect proiect)
+        {
+            _context.Remove(proiect);
+            return Save();
+        }
+
         public ICollection<Angajat> GetAngajatByProiect(int codProiect)
         {
             return _context.AngajatiProiecte.Where(a => a.Proiect.CodProiect == codProiect).Select(p => p.Angajat).ToList();
@@ -70,6 +76,12 @@ namespace HrAppSimple.Repository
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool UpdateProiect(Proiect proiect)
+        {
+            _context.Update(proiect);
+            return Save();
         }
     }
 }
