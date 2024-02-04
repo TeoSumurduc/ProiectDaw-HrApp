@@ -38,7 +38,7 @@ namespace HrAppSimple.Repository
             var proiect = _context.Proiecte.FirstOrDefault(p => p.CodProiect == codProiect);
             if (proiect == null)
             {
-                throw new ArgumentException("Invalid project code.", nameof(codProiect)); return null;
+                throw new ArgumentException("Invalid project code.", nameof(codProiect));
             }
             var denumireProiect = proiect.Denumire ?? string.Empty;
             return denumireProiect;

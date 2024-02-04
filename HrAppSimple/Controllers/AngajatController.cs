@@ -67,6 +67,54 @@ namespace HrAppSimple.Controllers
             return Ok(nume);
         }
 
+        [HttpGet("{matricula}/email")]
+        [ProducesResponseType(200, Type = typeof(Angajat))]
+        [ProducesResponseType(400)]
+        public IActionResult GetEmail(int matricula)
+        {
+            if (!_angajatRepository.AngajatExista(matricula))
+                return NotFound();
+
+            var email = _angajatRepository.GetEmail(matricula);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(email);
+        }
+
+        [HttpGet("{matricula}/data angajare")]
+        [ProducesResponseType(200, Type = typeof(Angajat))]
+        [ProducesResponseType(400)]
+        public IActionResult GetDataAngajare(int matricula)
+        {
+            if (!_angajatRepository.AngajatExista(matricula))
+                return NotFound();
+
+            var dataAngajare = _angajatRepository.GetDataAngajare(matricula);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(dataAngajare);
+        }
+
+        [HttpGet("{matricula}/data nastere")]
+        [ProducesResponseType(200, Type = typeof(Angajat))]
+        [ProducesResponseType(400)]
+        public IActionResult GetDataNastere(int matricula)
+        {
+            if (!_angajatRepository.AngajatExista(matricula))
+                return NotFound();
+
+            var dataNastere = _angajatRepository.GetDataNastere(matricula);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(dataNastere);
+        }
+
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

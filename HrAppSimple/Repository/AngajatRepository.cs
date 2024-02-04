@@ -60,6 +60,39 @@ namespace HrAppSimple.Repository
             return nume + " " + prenume;
         }
 
+        public DateTime GetDataAngajare(int matricula)
+        {
+            var angajat = _context.DetaliiAngajati.FirstOrDefault(a => a.MatriculaAng == matricula);
+            if (angajat == null)
+            {
+                throw new ArgumentException("Invalid project code.", nameof(matricula));
+            }
+            var dataAngajare = angajat.DataAngajare;
+            return dataAngajare;
+        }
+
+        public DateTime GetDataNastere(int matricula)
+        {
+            var angajat = _context.DetaliiAngajati.FirstOrDefault(a => a.MatriculaAng == matricula);
+            if (angajat == null)
+            {
+                throw new ArgumentException("Invalid project code.", nameof(matricula));
+            }
+            var dataNastere = angajat.DataNastere;
+            return dataNastere;
+        }
+
+        public string GetEmail(int matricula)
+        {
+            var angajat = _context.DetaliiAngajati.FirstOrDefault(a => a.MatriculaAng == matricula);
+            if (angajat == null)
+            {
+                return null;
+            }
+            var email=angajat.Email ?? string.Empty;
+            return email;
+        }
+
         public ICollection<Proiect> GetProiectOfAAngajat(int codAngajat)
         {
             return _context.AngajatiProiecte.Where(p => p.Angajat.Matricula == codAngajat).Select(p => p.Proiect).ToList();
