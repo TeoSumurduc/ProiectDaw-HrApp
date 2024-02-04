@@ -100,5 +100,24 @@ namespace HrAppSimple.Controllers
 
             return Ok("Avem un angajat nou!");
         }
+
+        [HttpGet("{Matricula}/proiect")]
+        [ProducesResponseType(200, Type = typeof(Angajat))]
+        [ProducesResponseType(400)]
+        public IActionResult GetProiectOfAAngajat(int matricula)
+        {
+            if (!_angajatRepository.AngajatExista(matricula))
+            {
+                return NotFound();
+            }
+
+            var angajat = _mapper.Map<ProiectDto>(
+                _angajatRepository.GetProiectOfAAngajat(matricula));
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(angajat);
+        }
     }
 }

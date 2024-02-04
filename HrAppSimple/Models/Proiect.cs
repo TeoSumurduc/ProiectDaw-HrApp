@@ -6,6 +6,6 @@
         public string Denumire { get; set; }
         public DateTime DataPredare { get; set; }
 
-        public ICollection<AngajatProiect> AngajatProiect { get; set; }
+        public ICollection<AngajatProiect> AngajatiProiecte { get; set; }
     }
 }

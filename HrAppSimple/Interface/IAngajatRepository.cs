@@ -9,6 +9,8 @@ namespace HrAppSimple.Interface
         string GetAngajatNumePrenume(int matricula);
         bool AngajatExista(int matricula);
         bool CreateAngajat(int codProiect, Angajat angajat);
+        ICollection<Proiect> GetProiectOfAAngajat(int codAngajat);
+        ICollection<Angajat> GetAngajatByProiect(int codProiect);
         bool Save();
     }
 }

@@ -9,12 +9,13 @@ namespace HrAppSimple.Helper
         public MappingProfiles()
         {
             CreateMap<Angajat, AngajatDto>();
+            CreateMap<AngajatDto, Angajat>();
             CreateMap<Departament, DepartamentDto>();
             CreateMap<DepartamentDto, Departament>();
             CreateMap<Locatie, LocatieDto>();
             CreateMap<LocatieDto, Locatie>();
-            CreateMap<AngajatDto, Angajat>();
-            CreateMap<LocatieDto, Locatie>();
+            CreateMap<Proiect, ProiectDto>();
+            CreateMap<ProiectDto, Proiect>();
         }
     }
 }

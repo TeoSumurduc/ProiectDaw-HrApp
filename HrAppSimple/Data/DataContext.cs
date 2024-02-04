@@ -10,12 +10,12 @@ namespace HrAppSimple.Data
             
         }
 
-        public DbSet<Angajat> Angajat { get; set; }
-        public DbSet<AngajatProiect> AngajatProiect { get; set; }
-        public DbSet<Departament> Departament { get; set; }
-        public DbSet<DetaliiAngajat> DetaliiAngajat { get; set; }
-        public DbSet<Locatie> Locatie { get; set; }
-        public DbSet<Proiect> Proiect { get; set; }
+        public DbSet<Angajat> Angajati{ get; set; }
+        public DbSet<AngajatProiect> AngajatiProiecte { get; set; }
+        public DbSet<Departament> Departamente { get; set; }
+        public DbSet<DetaliiAngajat> DetaliiAngajati { get; set; }
+        public DbSet<Locatie> Locatii { get; set; }
+        public DbSet<Proiect> Proiecte { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,12 +36,12 @@ namespace HrAppSimple.Data
 
             modelBuilder.Entity<AngajatProiect>()
                 .HasOne(a => a.Angajat)
-                .WithMany(ap => ap.AngajatProiect)
+                .WithMany(ap => ap.AngajatiProiecte)
                 .HasForeignKey(p => p.Matricula);
 
             modelBuilder.Entity<AngajatProiect>()
                 .HasOne(a => a.Proiect)
-                .WithMany(ap => ap.AngajatProiect)
+                .WithMany(ap => ap.AngajatiProiecte)
                 .HasForeignKey(p => p.CodProiect);
 
             //one to one

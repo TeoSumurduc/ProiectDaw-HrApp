@@ -14,12 +14,12 @@ namespace HrAppSimple.Repository
 
         public bool AngajatExista(int matricula)
         {
-            return _context.Angajat.Any(a => a.Matricula == matricula);
+            return _context.Angajati.Any(a => a.Matricula == matricula);
         }
 
         public bool CreateAngajat(int codProiect, Angajat angajat)
         {
-            var angajatProiectEntity = _context.Proiect.Where(a => a.CodProiect == codProiect).FirstOrDefault();
+            var angajatProiectEntity = _context.Proiecte.Where(a => a.CodProiect == codProiect).FirstOrDefault();
 
             var angajatProiect = new AngajatProiect()
             {
@@ -35,17 +35,22 @@ namespace HrAppSimple.Repository
 
         public Angajat GetAngajat(int matricula)
         {
-            return _context.Angajat.Where(p => p.Matricula == matricula).FirstOrDefault();
+            return _context.Angajati.Where(p => p.Matricula == matricula).FirstOrDefault();
+        }
+
+        public ICollection<Angajat> GetAngajatByProiect(int codProiect)
+        {
+            return _context.AngajatiProiecte.Where(a => a.Proiect.CodProiect == codProiect).Select(p => p.Angajat).ToList();
         }
 
         public ICollection<Angajat> GetAngajati()
         {
-            return _context.Angajat.OrderBy(P => P.Matricula).ToList();
+            return _context.Angajati.OrderBy(P => P.Matricula).ToList();
         }
 
         public string GetAngajatNumePrenume(int matricula)
         {
-            var angajat = _context.DetaliiAngajat.FirstOrDefault(a => a.MatriculaAng == matricula);
+            var angajat = _context.DetaliiAngajati.FirstOrDefault(a => a.MatriculaAng == matricula);
             if (angajat==null)
             {
                 return null;
@@ -53,6 +58,11 @@ namespace HrAppSimple.Repository
             var nume = angajat.Nume ?? string.Empty;
             var prenume = angajat.Prenume ?? string.Empty;
             return nume + " " + prenume;
+        }
+
+        public ICollection<Proiect> GetProiectOfAAngajat(int codAngajat)
+        {
+            return _context.AngajatiProiecte.Where(p => p.Angajat.Matricula == codAngajat).Select(p => p.Proiect).ToList();
         }
 
         public bool Save()

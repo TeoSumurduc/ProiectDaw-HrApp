@@ -14,17 +14,17 @@ namespace HrAppSimple.Repository
         }
         public ICollection<Angajat> GetAngajatByProiect(int codProiect)
         {
-            return _context.AngajatProiect.Where(a => a.Proiect.CodProiect == codProiect).Select(p => p.Angajat).ToList();
+            return _context.AngajatiProiecte.Where(a => a.Proiect.CodProiect == codProiect).Select(p => p.Angajat).ToList();
         }
 
         public Proiect GetProiect(int codProiect)
         {
-            return _context.Proiect.Where(p => p.CodProiect == codProiect).FirstOrDefault();
+            return _context.Proiecte.Where(p => p.CodProiect == codProiect).FirstOrDefault();
         }
 
         public DateTime GetProiectDataPredare(int codProiect)
         {
-            var proiect = _context.Proiect.FirstOrDefault(p => p.CodProiect == codProiect);
+            var proiect = _context.Proiecte.FirstOrDefault(p => p.CodProiect == codProiect);
             if (proiect == null)
             {
                 throw new ArgumentException("Invalid project code.", nameof(codProiect));
@@ -35,7 +35,7 @@ namespace HrAppSimple.Repository
 
         public string GetProiectDenumire(int codProiect)
         {
-            var proiect = _context.Proiect.FirstOrDefault(p => p.CodProiect == codProiect);
+            var proiect = _context.Proiecte.FirstOrDefault(p => p.CodProiect == codProiect);
             if (proiect == null)
             {
                 throw new ArgumentException("Invalid project code.", nameof(codProiect)); return null;
@@ -46,17 +46,17 @@ namespace HrAppSimple.Repository
 
         public ICollection<Proiect> GetProiecte()
         {
-            return _context.Proiect.ToList();
+            return _context.Proiecte.ToList();
         }
 
         public ICollection<Proiect> GetProiectOfAAngajat(int codAngajat)
         {
-            return _context.AngajatProiect.Where(p => p.Angajat.Matricula == codAngajat).Select(p => p.Proiect).ToList();
+            return _context.AngajatiProiecte.Where(p => p.Angajat.Matricula == codAngajat).Select(p => p.Proiect).ToList();
         }
 
         public bool ProiectExista(int codProiect)
         {
-            return _context.Proiect.Any(p => p.CodProiect == codProiect);
+            return _context.Proiecte.Any(p => p.CodProiect == codProiect);
         }
     }
 }

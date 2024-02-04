@@ -1,4 +1,6 @@
-﻿namespace HrAppSimple.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HrAppSimple.Models
 {
     public class Angajat
     {
@@ -7,7 +9,7 @@
         public Departament Departament { get; set; }
         public DetaliiAngajat DetaliiAngajat { get; set; }
 
-        public ICollection<AngajatProiect> AngajatProiect { get; set; }
+        public ICollection<AngajatProiect> AngajatiProiecte { get; set; }
 
 
     }

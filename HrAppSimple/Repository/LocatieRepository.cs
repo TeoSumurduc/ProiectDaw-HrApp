@@ -22,12 +22,12 @@ namespace HrAppSimple.Repository
 
         public Locatie GetLocatie(int codLocatie)
         {
-            return _context.Locatie.Where(l => l.CodLocatie == codLocatie).FirstOrDefault();
+            return _context.Locatii.Where(l => l.CodLocatie == codLocatie).FirstOrDefault();
         }
 
         public Locatie GetLocatieByDepartament(int codDepartament)
         { 
-               return _context.Departament
+               return _context.Departamente
                    .Where(d => d.CodDepartament == codDepartament)
                    .SelectMany(d => d.Locatie) 
                    .FirstOrDefault();
@@ -35,7 +35,7 @@ namespace HrAppSimple.Repository
 
         public string GetLocatieOras(int codLocatie)
         {
-            var locatie = _context.Locatie.FirstOrDefault(l => l.CodLocatie == codLocatie);
+            var locatie = _context.Locatii.FirstOrDefault(l => l.CodLocatie == codLocatie);
             if (locatie == null)
             {
                 return null;
@@ -60,7 +60,7 @@ namespace HrAppSimple.Repository
 
         public string GetLocatieTara(int codLocatie)
         {
-            var locatie = _context.Locatie.FirstOrDefault(l => l.CodLocatie == codLocatie);
+            var locatie = _context.Locatii.FirstOrDefault(l => l.CodLocatie == codLocatie);
             if (locatie == null)
             {
                 return null;
@@ -71,12 +71,12 @@ namespace HrAppSimple.Repository
 
         public ICollection<Locatie> GetLocatii()
         {
-            return _context.Locatie.ToList();
+            return _context.Locatii.ToList();
         }
 
         public bool LocatieExista(int codLocatie)
         {
-            return _context.Locatie.Any(l => l.CodLocatie == codLocatie);
+            return _context.Locatii.Any(l => l.CodLocatie == codLocatie);
         }
 
         public bool Save()

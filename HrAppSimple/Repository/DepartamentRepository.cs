@@ -16,15 +16,15 @@ namespace HrAppSimple.Repository
 
         public Departament GetDepartament(int codDepartament)
         {
-            return _context.Departament.Where(d => d.CodDepartament == codDepartament).FirstOrDefault();
+            return _context.Departamente.Where(d => d.CodDepartament == codDepartament).FirstOrDefault();
         }
         public ICollection<Departament> GetDepartamente()
         {
-            return _context.Departament.ToList();
+            return _context.Departamente.ToList();
         }
         public bool DepartamentExista(int codDepartament)
         {
-            return _context.Departament.Any(d => d.CodDepartament == codDepartament);
+            return _context.Departamente.Any(d => d.CodDepartament == codDepartament);
         }
     }
 }
