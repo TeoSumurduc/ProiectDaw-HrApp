@@ -4461,11 +4461,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\teodo\\Desktop\\Abul II Sem I\\asap.net\\HrAppSimple\\HrAppSimple\\HrAppSimple.csproj",
+      "projectUniqueName": "C:\\Users\\teodo\\Desktop\\GitHub\\ProiectDaw-HrApp\\HrAppSimple\\HrAppSimple.csproj",
       "projectName": "HrAppSimple",
-      "projectPath": "C:\\Users\\teodo\\Desktop\\Abul II Sem I\\asap.net\\HrAppSimple\\HrAppSimple\\HrAppSimple.csproj",
+      "projectPath": "C:\\Users\\teodo\\Desktop\\GitHub\\ProiectDaw-HrApp\\HrAppSimple\\HrAppSimple.csproj",
       "packagesPath": "C:\\Users\\teodo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\teodo\\Desktop\\Abul II Sem I\\asap.net\\HrAppSimple\\HrAppSimple\\obj\\",
+      "outputPath": "C:\\Users\\teodo\\Desktop\\GitHub\\ProiectDaw-HrApp\\HrAppSimple\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\teodo\\AppData\\Roaming\\NuGet\\NuGet.Config",
