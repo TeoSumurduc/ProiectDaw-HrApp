@@ -1,10 +1,13 @@
 ﻿using HrAppSimple.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace HrAppSimple.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<Utilizator>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { 
             
