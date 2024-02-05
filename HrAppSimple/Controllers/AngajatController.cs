@@ -4,6 +4,7 @@ using HrAppSimple.Dto;
 using HrAppSimple.Interface;
 using HrAppSimple.Models;
 using HrAppSimple.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -23,7 +24,7 @@ namespace HrAppSimple.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [ProducesResponseType(200,Type = typeof(IEnumerable<Angajat>))]
         public IActionResult GetAngajati()
         {

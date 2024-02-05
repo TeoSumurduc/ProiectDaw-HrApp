@@ -3,10 +3,11 @@ using HrAppSimple.Data;
 using HrAppSimple.Interface;
 using HrAppSimple.Models;
 using HrAppSimple.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 internal class Program
 {
@@ -25,46 +26,24 @@ internal class Program
         builder.Services.AddScoped<IProiectRepository, ProiectRepository>();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("Utilizator", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey
+            });
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
+        });
         builder.Services.AddDbContext<DataContext>(options =>
         {
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
-        builder.Services.AddIdentity<Utilizator, IdentityRole>(options =>
-        {
-            options.Password.RequireDigit = true;
-            options.Password.RequireLowercase = true;
-            options.Password.RequireUppercase = true;
-            options.Password.RequireNonAlphanumeric = true;
-            options.Password.RequiredLength = 12;
-        }
-        )
+        
+        builder.Services.AddAuthorization();
+        builder.Services.AddIdentityApiEndpoints<IdentityUser>()
             .AddEntityFrameworkStores<DataContext>();
-        builder.Services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme =
-            options.DefaultChallengeScheme =
-            options.DefaultForbidScheme =
-            options.DefaultScheme =
-            options.DefaultSignInScheme =
-            options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-
-        }).AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidIssuer = builder.Configuration["JWT:Issuer"],
-                ValidateAudience = true,
-                ValidAudience = builder.Configuration["JWT:Audience"],
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:SigningKey"]))
-            };
-        }
-
-            );
-
         var app = builder.Build();
 
         if (args.Length == 1 && args[0].ToLower() == "seeddata")
@@ -88,10 +67,11 @@ internal class Program
             app.UseSwaggerUI();
         }
 
+        app.MapIdentityApi<IdentityUser>();
+
         app.UseHttpsRedirection();
 
-        app.UseAuthentication();
-        app.UseAuthorization();
+        
 
         app.UseAuthorization();
 

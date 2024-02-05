@@ -276,3 +276,12 @@ C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\obj\Debug\net8.0\refi
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\obj\Debug\net8.0\HrAppSimple.pdb
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\obj\Debug\net8.0\HrAppSimple.genruntimeconfig.cache
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\obj\Debug\net8.0\ref\HrAppSimple.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Scrutor.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

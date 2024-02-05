@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HrAppSimple.Data
 {
-    public class DataContext : IdentityDbContext<Utilizator>
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { 
             
@@ -19,6 +19,8 @@ namespace HrAppSimple.Data
         public DbSet<DetaliiAngajat> DetaliiAngajati { get; set; }
         public DbSet<Locatie> Locatii { get; set; }
         public DbSet<Proiect> Proiecte { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +34,16 @@ namespace HrAppSimple.Data
                 .HasKey(d => d.CodLocatie);
             modelBuilder.Entity<Proiect>()
                 .HasKey(da => da.CodProiect);
-               
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserRole<string>>(entity =>
+            {
+                entity.HasKey(ur => new { ur.UserId, ur.RoleId });
+            });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity =>
+            {
+                entity.HasKey(ut => new { ut.UserId, ut.LoginProvider, ut.Name });
+            });
+
             //many to many
             modelBuilder.Entity<AngajatProiect>()
                 .HasKey(ap => new { ap.Matricula, ap.CodProiect });
