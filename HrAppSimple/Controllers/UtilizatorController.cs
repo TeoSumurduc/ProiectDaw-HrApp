@@ -134,6 +134,32 @@ namespace HrAppSimple.Controllers
 
 
         }
+        [HttpPut("ToAdmin"), Authorize(Roles = "Admin")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+
+        public IActionResult UpdateUtilizatorAdmin(int id)
+        {
+
+
+
+
+            if (!_utilizatorInterface.UtilizatorExista(id))
+            {
+                return NotFound();
+            }
+
+            Utilizator user = _utilizatorInterface.GetUtilizator(id);
+            user.IsAdmin = true;
+            if (!_utilizatorInterface.UpdateUtilizator(user))
+            {
+                ModelState.AddModelError("", "Eroare update!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Suces");
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult<String>> Login(UtilizatorDto rq)
