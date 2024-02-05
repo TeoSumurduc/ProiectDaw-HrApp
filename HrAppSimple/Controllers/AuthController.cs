@@ -46,7 +46,58 @@ namespace HrAppSimple.Controllers
             }
 
             string token = CreateToken(utilizator);
+
+            var refreshToken = GenerateRefreshToken();
+            SetRefreshToken(refreshToken);
+
             return Ok(token);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<ActionResult<string>> RefreshToken()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+
+            if(!utilizator.RefreshToken.Equals(refreshToken))
+            {
+                return Unauthorized("Invalid Refresh Token");
+            }
+            else if(utilizator.TokenExpires<DateTime.Now)
+            {
+                return Unauthorized("Token expired");
+            }
+
+            string token = CreateToken(utilizator);
+
+            var newRefreshToke = GenerateRefreshToken();
+
+            SetRefreshToken(newRefreshToke);
+
+            return Ok(token);
+        }
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            var refreshToken = new RefreshToken {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expire = DateTime.Now.AddDays(7)
+                };
+            return refreshToken;
+        }
+
+        private void SetRefreshToken(RefreshToken newRefreshToken)
+        {
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefreshToken.Expire,
+
+            };
+            Response.Cookies.Append("refreshToken", newRefreshToken.Token, cookieOptions);
+
+            utilizator.RefreshToken = newRefreshToken.Token;
+            utilizator.TokenExpires = newRefreshToken.Expire;
+            utilizator.TokenCreated = newRefreshToken.Created;
         }
 
         private string CreateToken(Utilizator utilizator)
@@ -64,7 +115,7 @@ namespace HrAppSimple.Controllers
 
             var token = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds);
                
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
