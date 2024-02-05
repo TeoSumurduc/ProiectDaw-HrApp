@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HrAppSimple.Data
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<Utilizator>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { 
             

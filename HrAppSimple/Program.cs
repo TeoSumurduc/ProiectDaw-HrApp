@@ -1,6 +1,7 @@
 ﻿using HrAppSimple;
 using HrAppSimple.Data;
 using HrAppSimple.Interface;
+using HrAppSimple.Models;
 using HrAppSimple.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -46,12 +47,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+builder.Services.AddIdentityApiEndpoints<Utilizator>()
+    .AddEntityFrameworkStores<DataContext>();
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 var app = builder.Build();
-
+builder.Services.AddAuthorization();
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
     SeedData(app);
 
@@ -72,6 +75,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapIdentityApi<Utilizator>();
 
 app.UseHttpsRedirection();
 

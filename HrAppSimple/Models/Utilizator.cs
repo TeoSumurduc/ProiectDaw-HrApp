@@ -1,6 +1,8 @@
-﻿namespace HrAppSimple.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace HrAppSimple.Models
 {
-    public class Utilizator
+    public class Utilizator: IdentityUser
     {
         public int Id { get; set; }
         public string Nume { get; set; } = string.Empty;
