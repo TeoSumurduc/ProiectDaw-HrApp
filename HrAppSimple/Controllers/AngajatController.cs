@@ -12,6 +12,7 @@ namespace HrAppSimple.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class AngajatController : Controller
     {
         private readonly IAngajatRepository _angajatRepository;
@@ -24,7 +25,7 @@ namespace HrAppSimple.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet, Authorize]
+        [HttpGet]
         [ProducesResponseType(200,Type = typeof(IEnumerable<Angajat>))]
         public IActionResult GetAngajati()
         {

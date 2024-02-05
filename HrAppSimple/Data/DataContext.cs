@@ -19,8 +19,9 @@ namespace HrAppSimple.Data
         public DbSet<DetaliiAngajat> DetaliiAngajati { get; set; }
         public DbSet<Locatie> Locatii { get; set; }
         public DbSet<Proiect> Proiecte { get; set; }
+        public DbSet<Utilizator> Utilizatori { get; set; }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -3,6 +3,7 @@ using HrAppSimple.Dto;
 using HrAppSimple.Interface;
 using HrAppSimple.Models;
 using HrAppSimple.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -33,7 +34,7 @@ namespace HrAppSimple.Controllers
             return Ok(proiecte);
         }
 
-        [HttpGet("{codProiect}")]
+        [HttpGet("{codProiect}"), Authorize(Roles = "Admin")]
         [ProducesResponseType(200, Type = typeof(Proiect))]
         [ProducesResponseType(400)]
         public IActionResult GetProiect(int codProiect)

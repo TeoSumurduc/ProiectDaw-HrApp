@@ -10,12 +10,18 @@ namespace HrAppSimple.Helper
         {
             CreateMap<Angajat, AngajatDto>();
             CreateMap<AngajatDto, Angajat>();
+
             CreateMap<Departament, DepartamentDto>();
             CreateMap<DepartamentDto, Departament>();
+
             CreateMap<Locatie, LocatieDto>();
             CreateMap<LocatieDto, Locatie>();
+
             CreateMap<Proiect, ProiectDto>();
             CreateMap<ProiectDto, Proiect>();
+
+            CreateMap<Utilizator, UtilizatorDto>();
+            CreateMap<UtilizatorDto, Utilizator>();
         }
     }
 }
