@@ -12,6 +12,7 @@ namespace HrAppSimple.Interface
         Utilizator GetUtilizator(int id);
 
         bool CreateUtilizator(Utilizator utilizatori);
+        bool UtilizatorExista(int id);
 
         ICollection<Utilizator> GetUtilizatori();
     }

@@ -50,5 +50,10 @@ namespace HrAppSimple.Repository
             _context.Update(user);
             return Save();
         }
+
+        public bool UtilizatorExista(int id)
+        {
+            return _context.Utilizatori.Any(p => p.Id == id);
+        }
     }
 }

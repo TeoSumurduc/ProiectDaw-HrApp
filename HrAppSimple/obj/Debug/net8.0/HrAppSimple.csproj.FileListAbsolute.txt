@@ -137,7 +137,6 @@ C:\Users\teodo\Desktop\Abul II Sem I\asap.net\HrAppSimple\HrAppSimple\bin\Debug\
 C:\Users\teodo\Desktop\Abul II Sem I\asap.net\HrAppSimple\HrAppSimple\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\teodo\Desktop\Abul II Sem I\asap.net\HrAppSimple\HrAppSimple\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\teodo\Desktop\Abul II Sem I\asap.net\HrAppSimple\HrAppSimple\obj\Debug\net8.0\HrAppSimple.sourcelink.json
-C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\appsettings.json
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\HrAppSimple.exe
 C:\Users\teodo\Desktop\GitHub\ProiectDaw-HrApp\HrAppSimple\bin\Debug\net8.0\HrAppSimple.deps.json

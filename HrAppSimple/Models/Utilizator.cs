@@ -6,6 +6,7 @@
         public string Nume { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        
+        public bool IsAdmin { get; set; } = false;
+
     }
 }

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HrAppSimple": {
+    "Angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/hr-app-simple",
+            "outputPath": "dist/angular",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -53,7 +53,12 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -83,10 +88,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "HrAppSimple:build:production"
+              "buildTarget": "Angular:build:production"
             },
             "development": {
-              "buildTarget": "HrAppSimple:build:development"
+              "buildTarget": "Angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -94,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "HrAppSimple:build"
+            "buildTarget": "Angular:build"
           }
         },
         "test": {
@@ -117,5 +122,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "db1b101d-fa9c-4457-b28e-5a979df4ae8a"
   }
 }
